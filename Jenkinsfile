@@ -1,6 +1,6 @@
 pipeline {
       tools{
-        gradle 'mymaven'
+        gradle 'mygradle'
     }
     agent any
     environment {
@@ -8,13 +8,11 @@ pipeline {
         DOCKER_IMAGE_NAME = "gayatri15/image"
     }
     stages {
-       stage('Compile'){
-             
-              steps{
-                  echo 'compiling..'
-                  sh 'mvn compile'
-	      }
-          }
+       steps {
+                echo 'Running build automation'
+                sh './gradlew build --no-daemon'
+                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+            }
         }
         stage('Build Docker Image') {
             when {
