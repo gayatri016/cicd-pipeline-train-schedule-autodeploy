@@ -1,5 +1,6 @@
 pipeline {
       tools{
+        jdk 'myjdk'
         gradle 'mygradle'
     }
     agent any
